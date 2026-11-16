@@ -1,28 +1,32 @@
 /*
- * PORTFOLIO DATA: edit this file to add or update work. No other file needs to change.
+ * PORTFOLIO DATA: edit this file to add or update anything on the site. No other file needs to change.
  *
- * Each project:
+ * projects (the video wall). Each project:
  *   id          unique short id
- *   url         original X post URL (required); the popup plays the post through X's own player
+ *   url         original X post URL; the popup plays the post through X's own player
  *   category    "fintech" | "crypto" | "ai" | null
- *   format      "video" | "photo"
  *   brand       brand/project name, or null
  *   title       short heading for the card
- *   description one sentence about the content
- *   caption     the post's caption as written (shown in the popup)
+ *   description one sentence about the video
  *   poster      preview image (X's own preview frame, or a local file such as "assets/img/x.jpg")
- *   ratio       "16:9" | "9:16" | "photo"
- *   duration    "m:ss", for video posts
- *   likes       like count on X when added (shown on the card)
+ *   ratio       "16:9" | "9:16" | "1:1"
+ *   duration    "m:ss"
+ *   likes       like count on X when added
  *   date        "YYYY-MM-DD"
- *   video       OPTIONAL local video file, e.g. "assets/videos/cleva-ach.mp4".
- *               If set, the popup plays it directly instead of X's player.
+ *   video       OPTIONAL local video file, e.g. "assets/videos/name.mp4" (plays directly instead of X's player)
  */
 window.PORTFOLIO = {
   name: "Dolapo",
   handle: "@Oxdolapo",
-  profileUrl: "https://x.com/Oxdolapo",
   email: "jusdola1@gmail.com",
+  socials: {
+    x: "https://x.com/Oxdolapo",
+    tiktok: "https://www.tiktok.com/@dolapo.ugc",
+    instagram: "https://www.instagram.com/jus_dola"
+  },
+
+  // Videos shown on the tilted hero cards (light and dark mode)
+  heroCards: ["cleva-ach", "genlayer-ep7", "spenda-2"],
 
   categories: [
     { key: "all",     label: "All" },
@@ -33,105 +37,157 @@ window.PORTFOLIO = {
 
   projects: [
     {
-      id: "spenda-2",
-      url: "https://x.com/Oxdolapo/status/2111321383376695492",
-      category: "fintech", format: "video", brand: "Spenda",
-      title: "Spenda 2.0: sharing out payments",
+      id: "gloam-privacy", url: "https://x.com/Oxdolapo/status/2122024101011452018",
+      category: "crypto", brand: "Gloam", title: "Gloam: private payments",
+      description: "How much strangers can see on public blockchains, and making private payments with Gloam.",
+      poster: "https://pbs.twimg.com/amplify_video_thumb/2122023873331724288/img/vLhoLr-1bUB02k_K.jpg",
+      ratio: "16:9", duration: "1:41", likes: 175, date: "2026-11-15"
+    },
+    {
+      id: "spenda-2", url: "https://x.com/Oxdolapo/status/2111321383376695492",
+      category: "fintech", brand: "Spenda", title: "Spenda 2.0: sharing out payments",
       description: "How Spenda 2.0 made it easier to send everyone their share after freelance work.",
-      caption: "Freelance work is stressful enough.\n\nChasing payments is one thing, figuring out how to send everyone their share is another\n\nSpenda 2.0 made that part a lot easier for me.\n\nHere's how I used it\n\n#MySpenda @MySpenda",
       poster: "https://pbs.twimg.com/amplify_video_thumb/2111321177159348225/img/cqrhSG-mG2RXC4zT.jpg",
       ratio: "9:16", duration: "1:34", likes: 234, date: "2026-10-17"
     },
     {
-      id: "genlayer-staking",
-      url: "https://x.com/Oxdolapo/status/2110234806982230205",
-      category: "crypto", format: "video", brand: "GenLayer",
-      title: "GenLayer: choosing validators",
+      id: "genlayer-staking", url: "https://x.com/Oxdolapo/status/2110234806982230205",
+      category: "crypto", brand: "GenLayer", title: "GenLayer: choosing validators",
       description: "Why validator choice matters when staking GEN, and whether to spread a stake across several.",
-      caption: "Two people. Same amount of GEN. Different choices.\n\nStaking is more than locking tokens, and choosing the right validator matters.\n\nIf I were delegating my GEN on @GenLayer, I'd look at validator performance and consider spreading my stake across several reliable validators.\n\nWhat would you choose: one validator or several??",
       poster: "https://pbs.twimg.com/amplify_video_thumb/2110234525309530112/img/fDFaPMqOOg8893cf.jpg",
       ratio: "16:9", duration: "1:39", likes: 131, date: "2026-10-14"
     },
     {
-      id: "cleva-data",
-      url: "https://x.com/Oxdolapo/status/2097909785043554804",
-      category: "fintech", format: "video", brand: "Cleva",
-      title: "Cleva: buying data in the app",
+      id: "cleva-data", url: "https://x.com/Oxdolapo/status/2097909785043554804",
+      category: "fintech", brand: "Cleva", title: "Cleva: buying data in the app",
       description: "Funding a Cleva account and buying data directly, with 3% off data purchases.",
-      caption: "Why are you still calling someone whenever your data finishes?\n\nWith @clevabanking, you can fund your account, buy your data directly and enjoy 3% off your data purchase.\n\nNo more having to ask someone to get you data, you can easily do that yourself.\n\nDownload Cleva and use my referral code https://app.getcleva.com/refer/DOLA754 to sign up.",
       poster: "https://pbs.twimg.com/amplify_video_thumb/2097909481682440192/img/zIx0Rmci79QDeYaV.jpg",
       ratio: "16:9", duration: "1:39", likes: 148, date: "2026-09-10"
     },
     {
-      id: "genlayer-points",
-      url: "https://x.com/Oxdolapo/status/2091028624132509924",
-      category: "crypto", format: "video", brand: "GenLayer",
-      title: "GenLayer Points explained",
+      id: "genlayer-points", url: "https://x.com/Oxdolapo/status/2091028624132509924",
+      category: "crypto", brand: "GenLayer", title: "GenLayer Points explained",
       description: "Season 1 has started, weekly conversions are live, and how contributions are now tracked.",
-      caption: "GenLayer Points are officially here\n\nSeason 1 has started, weekly conversions are live, and a lot is changing around how contributions are tracked.\n\nIf you've been confused about what happened to your points, this clears things up.\n\nEverything you did counts. Now, what you do next counts too… @GenLayer",
       poster: "https://pbs.twimg.com/amplify_video_thumb/2091028169344110592/img/R7zX_jj4WzzDea9v.jpg",
       ratio: "16:9", duration: "1:49", likes: 173, date: "2026-08-22"
     },
     {
-      id: "genlayer-ep21",
-      url: "https://x.com/Oxdolapo/status/2086680894878646613",
-      category: "crypto", format: "video", brand: "GenLayer",
-      title: "Learning GenLayer With Me, Ep. 21",
+      id: "genlayer-ep21", url: "https://x.com/Oxdolapo/status/2086680894878646613",
+      category: "ai", brand: "GenLayer", title: "Learning GenLayer With Me, Ep. 21",
       description: "What GenLayer is, who it's for and why it exists, in the simplest terms.",
-      caption: "What is @GenLayer?\n\nWho is it for?\n\nAnd why does it exist?\n\nEpisode 21 of Learning GenLayer With Me is about answering those three questions in the simplest way I can.\n\nIf you've been curious about GenLayer but still struggle to explain it, this one is for you.",
       poster: "https://pbs.twimg.com/amplify_video_thumb/2086680631237296128/img/c7wfKfVad5CyWU0T.jpg",
       ratio: "16:9", duration: "2:04", likes: 143, date: "2026-08-10"
     },
     {
-      id: "cleva-merch",
-      url: "https://x.com/Oxdolapo/status/2075090392391754104",
-      category: "fintech", format: "video", brand: "Cleva",
-      title: "Unboxing Cleva merch",
+      id: "cleva-merch", url: "https://x.com/Oxdolapo/status/2075090392391754104",
+      category: "fintech", brand: "Cleva", title: "Unboxing Cleva merch",
       description: "Unpacking a Cleva merch box on camera.",
-      caption: "Unpackage my @clevabanking merch with me",
       poster: "https://pbs.twimg.com/amplify_video_thumb/2075090182273921024/img/ktgE0pscXy_pJ3NF.jpg",
       ratio: "16:9", duration: "1:16", likes: 102, date: "2026-07-09"
     },
     {
-      id: "cleva-ach",
-      url: "https://x.com/Oxdolapo/status/2065307119377600690",
-      category: "fintech", format: "video", brand: "Cleva",
-      title: "Cleva: receiving USD with ACH",
+      id: "cleva-ach", url: "https://x.com/Oxdolapo/status/2065307119377600690",
+      category: "fintech", brand: "Cleva", title: "Cleva: receiving USD with ACH",
       description: "Getting paid internationally, with Cleva's ACH support for people who earn in dollars.",
-      caption: "Getting paid internationally shouldn't feel like a guessing game.\n\nFor freelancers, creators, and remote workers, receiving USD payments is often just as important as earning them.\n\nOne thing I like about @clevabanking is that it supports ACH payments, making it easier to receive USD from international clients, employers, and supported platforms.\n\nIf you earn in dollars, it's definitely worth checking out.",
       poster: "https://pbs.twimg.com/amplify_video_thumb/2065306930982068224/img/rXVOTSNjtpcL8t00.jpg",
       ratio: "16:9", duration: "1:08", likes: 252, date: "2026-06-12"
     },
     {
-      id: "insta-share",
-      url: "https://x.com/Oxdolapo/status/2060598356078981291",
-      category: null, format: "video", brand: null,
-      title: "Contest submission",
+      id: "insta-share", url: "https://x.com/Oxdolapo/status/2060598356078981291",
+      category: null, brand: null, title: "Contest submission",
       description: "A submission first shared on Instagram, reposted to X.",
-      caption: "Submitted this via insta but I'm sharing it here\n\nAnd also a like and comment would really help\n\nLink in CS ….thank you mutuals",
       poster: "https://pbs.twimg.com/amplify_video_thumb/2060598208422641668/img/uwmK23iztpgO-ssS.jpg",
       ratio: "16:9", duration: "0:55", likes: 141, date: "2026-05-30"
     },
     {
-      id: "ai-training",
-      url: "https://x.com/Oxdolapo/status/2111716177617535245",
-      category: "ai", format: "photo", brand: null,
-      title: "AI training account management",
-      description: "Managing accounts across AI training platforms like Outlier, Handshake, Mercor and DataAnnotation.",
-      caption: "If you're exploring AI training opportunities but don't have time to manage your accounts, I can help.\n\nI specialize in managing accounts across multiple platforms, including:\n\n→ Outlier\n→ Handshake\n→ Micro1\n→ Mercor\n→ AfterQuery\n→ OneForma\n→ Snorkel\n→ DataAnnotation",
-      poster: "https://pbs.twimg.com/media/HU5Sq0QWgAA2-rW.jpg",
-      ratio: "photo", likes: 71, date: "2026-10-18"
+      id: "online-tasks", url: "https://x.com/Oxdolapo/status/2058062502445941079",
+      category: "crypto", brand: null, title: "Online tasks for crypto",
+      description: "Would you do online tasks for crypto? A quick vertical take.",
+      poster: "https://pbs.twimg.com/amplify_video_thumb/2058062246987603968/img/2uQmFyCdLYHSPBHP.jpg",
+      ratio: "9:16", duration: "1:02", likes: 111, date: "2026-05-23"
+    },
+    {
+      id: "spoutfi-loans", url: "https://x.com/Oxdolapo/status/2056608553863929916",
+      category: "crypto", brand: "SpoutFi", title: "SpoutFi: borrow like the rich",
+      description: "Why the ultra-rich borrow against assets instead of selling, and SpoutFi opening that to everyone.",
+      poster: "https://pbs.twimg.com/amplify_video_thumb/2056608007060889600/img/e9xlPmQhAlFlvosi.jpg",
+      ratio: "16:9", duration: "1:17", likes: 115, date: "2026-05-19"
+    },
+    {
+      id: "genlayer-ep7", url: "https://x.com/Oxdolapo/status/2054799574217236942",
+      category: "ai", brand: "GenLayer", title: "GenLayer Ep. 7: AI on the blockchain",
+      description: "AI doesn't always give the same answer twice. How GenLayer reaches consensus anyway.",
+      poster: "https://pbs.twimg.com/amplify_video_thumb/2054799289012920320/img/ZnfQA9NwEMJ6DZq6.jpg",
+      ratio: "16:9", duration: "1:38", likes: 96, date: "2026-05-14"
+    },
+    {
+      id: "spoutfi-cake", url: "https://x.com/Oxdolapo/status/2054074881025732934",
+      category: "crypto", brand: "SpoutFi", title: "SpoutFi: eat your cake, keep it",
+      description: "Borrowing against your stocks at 0% interest while keeping the upside.",
+      poster: "https://pbs.twimg.com/amplify_video_thumb/2054074743846838272/img/lbc-MpKl62wgaxUw.jpg",
+      ratio: "16:9", duration: "1:04", likes: 116, date: "2026-05-12"
+    },
+    {
+      id: "walletconnect-april", url: "https://x.com/Oxdolapo/status/2053345446957814098",
+      category: "crypto", brand: "WalletConnect", title: "WalletConnect: April recap",
+      description: "A month of WalletConnect, from partnerships to events, in one video.",
+      poster: "https://pbs.twimg.com/amplify_video_thumb/2053345324790423553/img/7_KQ9Fy_H0P8sy5R.jpg",
+      ratio: "1:1", duration: "1:16", likes: 75, date: "2026-05-10"
+    },
+    {
+      id: "roxom-yield", url: "https://x.com/Oxdolapo/status/2047910524281585691",
+      category: "crypto", brand: "Roxom", title: "Roxom: put idle stables to work",
+      description: "Depositing stablecoins on Roxom to earn monthly bitcoin dividends instead of leaving money idle.",
+      poster: "https://pbs.twimg.com/amplify_video_thumb/2047909273691447296/img/ubBAJdgLSZNFYLTz.jpg",
+      ratio: "16:9", duration: "1:30", likes: 96, date: "2026-04-25"
     }
   ],
 
-  services: [
-    { icon: "video",   title: "Short-form video",  line: "Videos that explain, demo or promote a product." },
-    { icon: "phone",   title: "Fintech videos",    line: "App walkthroughs, feature demos and explainers." },
-    { icon: "cube",    title: "Crypto & Web3",     line: "Project intros, ecosystem explainers, campaigns." },
-    { icon: "user",    title: "UGC-style content", line: "Natural videos that show how a product works." },
-    { icon: "x",       title: "X content",         line: "Posts, threads and campaign materials." },
-    { icon: "sparkle", title: "AI & tech",         line: "Audience-first content about AI platforms." }
+  // Brand explainer case studies. "videos" are project ids from the list above.
+  caseStudies: [
+    {
+      brand: "GenLayer", tag: "AI + Web3", badge: "Paid partnership",
+      title: "Learning GenLayer With Me",
+      line: "A running explainer series that makes an AI-native blockchain easy to follow.",
+      videos: ["genlayer-ep7", "genlayer-ep21", "genlayer-points", "genlayer-staking"],
+      stats: [["21+", "episodes"], ["6.2K", "views on Ep. 7"], ["543", "likes on these 4"]],
+      proof: { quote: "amazing", by: "@GenLayer", url: "https://x.com/GenLayer/status/2054842804195512616" }
+    },
+    {
+      brand: "Cleva", tag: "Fintech",
+      title: "Cleva in everyday moments",
+      line: "Real uses on camera: getting paid in USD, buying data, unboxing the merch.",
+      videos: ["cleva-ach", "cleva-data", "cleva-merch"],
+      stats: [["3", "videos"], ["502", "likes"], ["252", "on the top post"]]
+    },
+    {
+      brand: "SpoutFi", tag: "DeFi",
+      title: "Borrowing against stocks, simplified",
+      line: "A DeFi brokerage pitch turned into a simple 'eat your cake and keep it' story.",
+      videos: ["spoutfi-cake", "spoutfi-loans"],
+      stats: [["2", "videos"], ["231", "likes"]]
+    }
   ],
 
-  strengths: ["Video first", "Plain language", "Fintech + crypto", "Native to X", "Video + writing", "AI platforms"]
+  packages: [
+    { icon: "video",  title: "Single video",        line: "One explainer, scripted, shot and edited." },
+    { icon: "thread", title: "Video + thread",       line: "A video plus an X thread that carries it further." },
+    { icon: "star",   title: "Monthly ambassador",   line: "Ongoing videos and posts as your voice for the month." },
+    { icon: "custom", title: "Custom",               line: "Tell me what you need and we'll shape it together." }
+  ],
+
+  covers: ["Fintech", "Crypto & Web3", "AI", "UGC", "X threads"],
+
+  tools: [
+    { icon: "scissors", name: "CapCut" },
+    { icon: "palette",  name: "Canva" },
+    { icon: "sparkle",  name: "Claude / ChatGPT" },
+    { icon: "chart",    name: "X Analytics" }
+  ],
+
+  skills: [
+    { group: "Writing",    items: ["Hook writing", "Scriptwriting", "Captioning", "Simplifying technical topics"] },
+    { group: "Production", items: ["Pacing", "Voiceover", "Thumbnail design", "Diagram storytelling"] },
+    { group: "Strategy",   items: ["Series planning", "Project engagement", "Analytics reading", "Pitching to Web3 projects"] }
+  ]
 };
