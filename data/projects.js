@@ -146,7 +146,7 @@ window.PORTFOLIO = {
   // Brand explainer case studies. "videos" are project ids from the list above.
   caseStudies: [
     {
-      brand: "GenLayer", tag: "AI + Web3", badge: "Paid partnership",
+      brand: "GenLayer", tag: "AI + Web3",
       title: "Learning GenLayer With Me",
       line: "A running explainer series that makes an AI-native blockchain easy to follow.",
       videos: ["genlayer-ep7", "genlayer-ep21", "genlayer-points", "genlayer-staking"],
