@@ -168,8 +168,9 @@ window.PORTFOLIO = {
       brand: "SpoutFi", tag: "DeFi",
       title: "Borrowing against stocks, simplified",
       line: "A DeFi brokerage pitch turned into a simple 'eat your cake and keep it' story.",
-      videos: ["spoutfi-cake", "spoutfi-loans"],
-      stats: [["2", "videos"], ["231", "likes"]]
+      videos: ["spoutfi-loans", "spoutfi-cake"],
+      stats: [["2", "videos"], ["3.9K", "views on one post"], ["231", "likes"]],
+      proof: { quote: "Nice video", by: "@SpoutFi", url: "https://x.com/SpoutFi/status/2058124406669394377" }
     }
   ],
 
@@ -184,7 +185,6 @@ window.PORTFOLIO = {
 
   tools: [
     { icon: "scissors", name: "CapCut" },
-    { icon: "palette",  name: "Canva" },
     { icon: "sparkle",  name: "Claude / ChatGPT" },
     { icon: "chart",    name: "X Analytics" }
   ],
