@@ -72,43 +72,14 @@
   </div>
 </section>
 
-<!-- WORK: light = video grid · dark = player + playlist (desktop) · tall-card grid on phones -->
+<!-- WORK: grouped by area -->
 <section class="work" id="work" aria-labelledby="work-title">
   <div class="wrap">
     <div class="section-head">
       <h2 id="work-title" class="section-title">The work</h2>
-      <div class="chips" role="tablist" aria-label="Filter videos" data-filters></div>
+      <nav class="chips" aria-label="Jump to an area" data-jump></nav>
     </div>
-
-    <div class="grid" data-grid></div>
-    <button class="btn btn-ghost show-more" data-more hidden>Show all videos</button>
-
-    <div class="player" data-player>
-      <div class="stage">
-        <button class="stage-media" data-stage-play aria-label="Play video">
-          <img class="stage-bg" alt="" referrerpolicy="no-referrer">
-          <img class="stage-img" alt="" referrerpolicy="no-referrer">
-          <span class="play-big" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
-          <span class="stage-time"></span>
-        </button>
-        <div class="stage-info">
-          <span class="tag" data-stage-tag></span>
-          <h3 data-stage-title></h3>
-          <p data-stage-desc></p>
-          <div class="stage-meta" data-stage-meta></div>
-          <div class="stage-actions">
-            <button class="btn btn-primary" data-stage-play><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>Play</button>
-            <a class="btn btn-ghost" data-stage-link target="_blank" rel="noopener">Open on X ↗</a>
-          </div>
-        </div>
-      </div>
-      <div class="rail-wrap">
-        <button class="icon-btn rail-btn prev" data-rail="-1" aria-label="Scroll playlist left">‹</button>
-        <div class="rail" data-rail-list role="listbox" aria-label="Playlist"></div>
-        <button class="icon-btn rail-btn next" data-rail="1" aria-label="Scroll playlist right">›</button>
-      </div>
-    </div>
-
+    <div class="work-groups" data-work></div>
     <p class="more"><a href="https://x.com/Oxdolapo" target="_blank" rel="noopener">More on @Oxdolapo ↗</a></p>
   </div>
 </section>
@@ -150,7 +121,8 @@
     <img class="about-avatar" src="assets/img/dolapo-avatar.jpg" alt="" width="400" height="400" loading="lazy">
     <div>
       <h2 id="about-title" class="section-title">About Dolapo</h2>
-      <p>A content creator at the intersection of technology, finance and online communities. I make digital products easier to understand, from fintech apps and crypto projects to AI.</p>
+      <p>I'm Dolapo, a video content creator and digital storyteller focused on fintech, Web3, crypto and AI.</p>
+      <p>I create videos, product walkthroughs, tutorials and written content that help brands explain what they're building, connect with their audience and make complex products easier to understand.</p>
       <div class="socials" data-socials></div>
     </div>
   </div>
@@ -163,7 +135,7 @@
       <span class="stars s1" aria-hidden="true"></span><span class="stars s2" aria-hidden="true"></span>
       <span class="deco d1" aria-hidden="true"></span><span class="deco d2" aria-hidden="true"></span>
       <h2 id="contact-title">Have a product that needs a story?</h2>
-      <p>Fintech, crypto, Web3 or AI: let's make it clear.</p>
+      <p class="avail"><i aria-hidden="true"></i>Available for freelance projects, brand partnerships and ongoing content collaborations.</p>
       <div class="contact-actions">
         <a class="btn btn-primary" href="mailto:jusdola1@gmail.com">Email me</a>
         <a class="btn btn-ghost" href="https://x.com/Oxdolapo" target="_blank" rel="noopener">DM on X ↗</a>

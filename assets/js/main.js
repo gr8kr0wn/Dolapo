@@ -32,9 +32,8 @@
     quote: I('<path d="M7 7h4v4H8v2a2 2 0 0 0 2 2v2a4 4 0 0 1-4-4V8a1 1 0 0 1 1-1zm8 0h4v4h-3v2a2 2 0 0 0 2 2v2a4 4 0 0 1-4-4V8a1 1 0 0 1 1-1z"/>', true),
   };
 
-  let filter = "all";
-  let current = 0;
-  const visible = () => D.projects.filter((p) => filter === "all" || p.category === filter);
+  const contribution = (p) => p.contribution || D.contribution || [];
+  const inGroup = (key) => D.projects.filter((p) => (p.category || "other") === key);
 
   /* ---------- hero ---------- */
   function renderHero() {
@@ -47,70 +46,38 @@
       </button>`).join("");
   }
 
-  /* ---------- filters ---------- */
-  function renderFilters() {
-    $("[data-filters]").innerHTML = D.categories.map((c) => {
-      const n = c.key === "all" ? D.projects.length : D.projects.filter((p) => p.category === c.key).length;
-      return `<button class="chip" role="tab" data-filter="${c.key}" aria-selected="${c.key === filter}">${c.key !== "all" ? `<i style="background:${catColor[c.key]}"></i>` : ""}${c.label}<small>${n}</small></button>`;
+  /* ---------- work, grouped by area ---------- */
+  function renderWork() {
+    const groups = D.categories.map((c) => ({ ...c, items: inGroup(c.key) })).filter((g) => g.items.length);
+    $("[data-jump]").innerHTML = groups.map((g) =>
+      `<a class="chip" href="#area-${g.key}"><i style="background:${catColor[g.key]}"></i>${g.label}<small>${g.items.length}</small></a>`).join("");
+    $("[data-work]").innerHTML = groups.map((g) => {
+      const ids = g.items.map((p) => p.id).join(",");
+      return `
+      <section class="work-group" id="area-${g.key}" aria-labelledby="area-${g.key}-title">
+        <header class="group-head">
+          <h3 id="area-${g.key}-title"><i style="background:${catColor[g.key]}"></i>${g.label}</h3>
+          <p>${esc(g.intro || "")}</p>
+        </header>
+        <div class="vgrid">
+          ${g.items.map((p) => `
+          <article class="vcard">
+            <button class="vmedia" data-open="${p.id}" data-list="${ids}" aria-label="Play: ${esc(p.title)}">
+              ${img(p)}
+              <span class="tag ${catKey(p)}">${esc(p.brand || g.label)}</span>
+              <span class="play-dot" aria-hidden="true">${ICON.play}</span>
+              <span class="vtime">${p.duration}</span>
+            </button>
+            <div class="vbody">
+              <h4>${esc(p.title)}</h4>
+              <p>${esc(p.description)}</p>
+              <ul class="contrib" aria-label="Her contribution">${contribution(p).map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
+            </div>
+          </article>`).join("")}
+        </div>
+        ${g.items.length > 4 ? `<button class="btn btn-ghost show-more" data-more>Show all ${g.items.length}</button>` : ""}
+      </section>`;
     }).join("");
-  }
-
-  /* ---------- grid (light; and phones in both modes) ---------- */
-  function renderGrid() {
-    const list = visible(), more = $("[data-more]");
-    more.hidden = list.length <= 6;
-    more.classList.toggle("desk-hide", list.length <= 9);
-    more.textContent = `Show all ${list.length} videos`;
-    $("[data-grid]").classList.remove("expanded");
-    $("[data-grid]").innerHTML = list.map((p) => `
-      <button class="tile" data-open="${p.id}" aria-label="Play: ${esc(p.title)}">
-        <span class="tile-media">
-          ${img(p)}
-          <span class="tag ${catKey(p)}">${esc(p.brand || catLabel(p))}</span>
-          <span class="play-dot" aria-hidden="true">${ICON.play}</span>
-          <span class="tile-foot"><span>${ICON.play}${p.duration}</span><span>${ICON.heart}${fmt(p.likes || 0)}</span></span>
-          <span class="tile-over"><b>${esc(p.title)}</b><small>${p.duration} · ${ICON.heart}${fmt(p.likes || 0)}</small></span>
-        </span>
-        <h3>${esc(p.title)}</h3>
-        <p>${esc(p.description)}</p>
-      </button>`).join("");
-  }
-
-  /* ---------- player + rail (dark, desktop) ---------- */
-  function renderRail() {
-    const list = visible();
-    if (current >= list.length) current = 0;
-    $("[data-rail-list]").innerHTML = list.map((p, i) => `
-      <button class="rail-item" role="option" data-pick="${i}" aria-selected="${i === current}">
-        <span class="rail-thumb">${img(p)}<span>${p.duration}</span></span>
-        <b>${esc(p.title)}</b><small>${esc(p.brand || catLabel(p))}</small>
-      </button>`).join("");
-    setStage(current, false);
-  }
-  function setStage(i, animate = true) {
-    const list = visible();
-    if (!list.length) return;
-    current = (i + list.length) % list.length;
-    const p = list[current];
-    const media = $(".stage-media");
-    const apply = () => {
-      $(".stage-img").src = p.poster; $(".stage-bg").src = p.poster; $(".stage-img").alt = p.title;
-      media.classList.toggle("vertical", p.ratio === "9:16" || p.ratio === "1:1");
-      $(".stage-time").textContent = p.duration;
-      const tag = $("[data-stage-tag]");
-      tag.className = "tag " + catKey(p);
-      tag.textContent = p.brand ? `${p.brand} · ${catLabel(p)}` : catLabel(p);
-      $("[data-stage-title]").textContent = p.title;
-      $("[data-stage-desc]").textContent = p.description;
-      $("[data-stage-meta]").innerHTML = `<span><b>${fmt(p.likes || 0)}</b> likes</span><span>${new Date(p.date).toLocaleDateString(undefined, { month: "short", year: "numeric" })}</span>`;
-      $("[data-stage-link]").href = p.url;
-      $$("[data-stage-play]").forEach((b) => (b.dataset.open = p.id));
-      media.classList.remove("swap");
-    };
-    if (animate) { media.classList.add("swap"); setTimeout(apply, 180); } else apply();
-    $$(".rail-item").forEach((el, k) => el.setAttribute("aria-selected", k === current));
-    const active = $$(".rail-item")[current];
-    if (animate && active) active.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }
 
   /* ---------- case studies ---------- */
@@ -148,7 +115,7 @@
     $("[data-skills]").innerHTML = D.skills.map((g) => `
       <div class="skill-group"><h3>${esc(g.group)}</h3><ul>${g.items.map((s) => `<li>${esc(s)}</li>`).join("")}</ul></div>`).join("");
     const so = D.socials;
-    const socials = [["x", "X", so.x], ["tiktok", "TikTok", so.tiktok], ["instagram", "Instagram", so.instagram]].filter((s) => s[2]);
+    const socials = [["x", "X", so.x], ["instagram", "Instagram", so.instagram], ["tiktok", "TikTok", so.tiktok]].filter((s) => s[2]);
     $$("[data-socials]").forEach((el) => (el.innerHTML = socials.map(([k, label, url]) => `<a class="social" href="${url}" target="_blank" rel="noopener" aria-label="${label}">${ICON[k]}<span>${label}</span></a>`).join("")));
     $("[data-year]").textContent = new Date().getFullYear();
   }
@@ -157,7 +124,7 @@
   const modal = $("[data-modal]"), box = $("[data-modal-box]");
   let mList = [], mIndex = 0, lastFocus = null;
   function openModal(id, listIds) {
-    mList = listIds ? listIds.map(byId).filter(Boolean) : visible();
+    mList = listIds ? listIds.map(byId).filter(Boolean) : D.projects;
     if (!mList.find((p) => p.id === id)) mList = D.projects;
     mIndex = Math.max(0, mList.findIndex((p) => p.id === id));
     lastFocus = document.activeElement;
@@ -210,15 +177,10 @@
     clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 2200);
   }
   document.addEventListener("click", async (e) => {
-    const f = e.target.closest("[data-filter]");
-    if (f) { filter = f.dataset.filter; current = 0; renderFilters(); renderGrid(); renderRail(); return; }
-    const pick = e.target.closest("[data-pick]");
-    if (pick) { setStage(+pick.dataset.pick); return; }
     const open = e.target.closest("[data-open]");
     if (open) { openModal(open.dataset.open, open.dataset.list ? open.dataset.list.split(",") : null); return; }
-    if (e.target.closest("[data-more]")) { $("[data-grid]").classList.add("expanded"); e.target.hidden = true; return; }
-    const r = e.target.closest("[data-rail]");
-    if (r) { $("[data-rail-list]").scrollBy({ left: +r.dataset.rail * 460, behavior: "smooth" }); return; }
+    const more = e.target.closest("[data-more]");
+    if (more) { more.closest(".work-group").classList.add("expanded"); more.remove(); return; }
     if (e.target.closest("[data-modal-close]") || e.target === modal) { closeModal(); return; }
     const mn = e.target.closest("[data-modal-nav]");
     if (mn) { mIndex += +mn.dataset.modalNav; showModal(); return; }
@@ -235,5 +197,5 @@
   const onScroll = () => nav.classList.toggle("scrolled", scrollY > 20);
   addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
-  renderHero(); renderFilters(); renderGrid(); renderRail(); renderCases(); renderExtras(); initTheme();
+  renderHero(); renderWork(); renderCases(); renderExtras(); initTheme();
 })();

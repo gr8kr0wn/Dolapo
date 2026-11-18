@@ -4,7 +4,7 @@
  * projects (the video wall). Each project:
  *   id          unique short id
  *   url         original X post URL; the popup plays the post through X's own player
- *   category    "fintech" | "crypto" | "ai" | null
+ *   category    "fintech" | "crypto" | "ai" | "other"
  *   brand       brand/project name, or null
  *   title       short heading for the card
  *   description one sentence about the video
@@ -28,11 +28,15 @@ window.PORTFOLIO = {
   // Videos shown on the tilted hero cards (light and dark mode)
   heroCards: ["cleva-ach", "genlayer-ep7", "spenda-2"],
 
+  // What she did on every video (a project can override this with its own "contribution")
+  contribution: ["Script", "On camera", "Edit"],
+
+  // Work is shown grouped in this order. Each project's "category" must be one of these keys.
   categories: [
-    { key: "all",     label: "All" },
-    { key: "fintech", label: "Fintech" },
-    { key: "crypto",  label: "Crypto & Web3" },
-    { key: "ai",      label: "AI" }
+    { key: "fintech", label: "Fintech",       intro: "App walkthroughs and real-life use cases." },
+    { key: "crypto",  label: "Web3 & Crypto", intro: "Project explainers, ecosystem videos and product demos." },
+    { key: "ai",      label: "AI",            intro: "AI platforms and AI + blockchain explainers." },
+    { key: "other",   label: "Other",         intro: "Contest entries and creative pieces." }
   ],
 
   projects: [
@@ -94,7 +98,7 @@ window.PORTFOLIO = {
     },
     {
       id: "insta-share", url: "https://x.com/Oxdolapo/status/2060598356078981291",
-      category: null, brand: null, title: "Contest submission",
+      category: "other", brand: null, title: "Contest submission",
       description: "A submission first shared on Instagram, reposted to X.",
       poster: "https://pbs.twimg.com/amplify_video_thumb/2060598208422641668/img/uwmK23iztpgO-ssS.jpg",
       ratio: "16:9", duration: "0:55", likes: 141, date: "2026-05-30"
