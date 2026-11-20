@@ -181,6 +181,9 @@ window.PORTFOLIO = {
     { icon: "custom", title: "Custom",               line: "Tell me what you need and we'll shape it together." }
   ],
 
+  // Past roles, shown under the About bio
+  previously: ["Affiliate for Mojo"],
+
   covers: ["Fintech", "Crypto & Web3", "AI", "UGC", "X threads"],
 
   tools: [
