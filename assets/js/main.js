@@ -117,6 +117,8 @@
     const so = D.socials;
     const socials = [["x", "X", so.x], ["instagram", "Instagram", so.instagram], ["tiktok", "TikTok", so.tiktok]].filter((s) => s[2]);
     $$("[data-socials]").forEach((el) => (el.innerHTML = socials.map(([k, label, url]) => `<a class="social" href="${url}" target="_blank" rel="noopener" aria-label="${label}">${ICON[k]}<span>${label}</span></a>`).join("")));
+    const prev = $("[data-previously]");
+    if (prev) { prev.hidden = !(D.previously || []).length; prev.innerHTML = `<span>Previously</span>${(D.previously || []).map((r) => `<em>${esc(r)}</em>`).join("")}`; }
     $("[data-year]").textContent = new Date().getFullYear();
   }
 
